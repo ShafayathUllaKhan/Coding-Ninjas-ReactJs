@@ -1,0 +1,22 @@
+react js is javascript library a external liberary
+there are two ways to use react js 
+1. download the package
+2. or use cdn links (content delivery network)
+
+note live server should be installed when using cdn other wise the js file will not execute
+
+
+
+
+
+
+
+
+spa vs mpa
+
+React is a declarative language --> tell what you want to do?
+js is a Imapative language --> you should tell the browser how to do 
+Html is a declarative language --> tell what you want to do?
+
+
+
