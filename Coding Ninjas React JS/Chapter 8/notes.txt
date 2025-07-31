@@ -1,0 +1,59 @@
+1. Create createContext()
+2. Provide <context.Provider value={{give any object}}>
+
+3. consume the context value
+
+
+
+
+
+
+import the createContext function 
+
+import { createContext } from "react";
+
+export const context = createContext();
+
+ <context.Provider value={color} >
+      <ChildComponent />
+      </context.Provider>
+
+
+  const color = useContext(context);
+
+second form of using context api
+
+const GrandChildComponent = () =>{ 
+  // const color = useContext(context);
+  return(
+    <context.Consumer>
+      {(color)=>{
+        return (<p style={{ color: color.color }}>Color: {color.color}</p>);
+      }}
+    </context.Consumer>
+  ) 
+};
+
+
+// custom provider 
+
+is a component which acts as a provider and it makes use of default provider
+
+import { createContext, useState } from "react";
+
+const ItemContext = createContext();
+
+function CustomItemContext({children}){
+    const [total, setTotal] = useState(0);
+  const [item, setItem] = useState(0);
+    return(
+        <ItemContext.Provider value={{total,setTotal,item,setItem}}>
+            {children}
+        </ItemContext.Provider>
+    )
+}
+
+export {ItemContext,CustomItemContext};
+
+// Custom Hooks
+

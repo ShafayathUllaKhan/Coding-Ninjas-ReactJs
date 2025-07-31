@@ -1,0 +1,13 @@
+always remember this state store data but even variable store data but state help us rerender the component
+
+child to parent communication
+
+| Method               | Reactive? | Suitable for       | Use Case                             |
+| -------------------- | --------- | ------------------ | ------------------------------------ |
+| Callback functions   | ✅         | Most common cases  | Direct child-to-parent communication |
+| Context API          | ✅         | Shared state       | When many components need data       |
+| Global state (Redux) | ✅         | Large applications | Cross-component or complex state     |
+| Refs                 | ❌         | Rare edge cases    | Quick data access without re-renders |
+
+
+

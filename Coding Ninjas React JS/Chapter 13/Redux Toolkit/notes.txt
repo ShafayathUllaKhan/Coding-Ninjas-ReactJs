@@ -1,0 +1,43 @@
+
+npm i @reduxjs/toolkit
+
+// middlewares
+
+manual logger
+
+// asyncronous in redux toolkit
+
+using fetch
+
+using axios in useeffect hook which is in component
+
+useEffect(()=>{
+      // fetch('http://localhost:4100/api/todos/').then((res)=>{
+      //     return res.json();
+      // }).then((res)=>{
+      //   console.log(res);
+      // });
+
+      axios.get('http://localhost:4100/api/todos/').then((res)=>{
+        console.log(res.data);
+      })
+  },[])
+
+
+
+but now you have you use these asyncronous getting data from api by redux 
+
+and one more point in redux reducer you can not use side effects like getting data from api because it is pure functions so you have some more feature in redux toolkit 
+
+// http calls with redux
+
+
+// create Async Thunk function
+
+1. create Async Thunk function
+2. call api
+3. set Initial State
+4. call Async Thunk from component
+
+
+

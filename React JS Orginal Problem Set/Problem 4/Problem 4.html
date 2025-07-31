@@ -1,0 +1,71 @@
+Problem statement
+You need to build a React application that converts the temperature from Fahrenheit to Celsius and displays the results on the web page.
+
+You need to implement the toCelsius() function and utilize it to show the converted temperature.
+
+
+Expected Output:
+
+
+Test Cases:
+App should render the data correctly
+
+
+The application should render two paragraphs:
+
+
+
+The first paragraph should display "Temperature in Fahrenheit: <temperature in Fahrenheit>".
+
+The second paragraph should display "Temperature in Celsius: <temperature in Celsius>".
+
+Hint:
+You can use the given formula to convert the temperature: 
+Celsius = (Fahrenheit - 32) * (5 / 9).
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>React App</title>
+
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const App = () => {
+        const tempInFahrenheit = 12;
+        //Do not modify the function structure (do not change the function to an arrow function)
+        function toCelsius(temp){
+            //write logic here to convert the temp in celsius
+           return ((temp - 32) * 5) / 9
+        }
+
+        return (
+          <>
+          <h1>Temperature Converter</h1>
+            <p>Temperature in fahrenheit: {tempInFahrenheit}</p>
+          {/* display the temperature in celcius here using the p tag by passing the */}
+           <p>Temperature in celsius: {toCelsius(tempInFahrenheit)}</p>
+          </>
+        );
+      };
+
+      const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+      rootElement.render(<App />);
+    </script>
+
+  </body>
+</html>
+

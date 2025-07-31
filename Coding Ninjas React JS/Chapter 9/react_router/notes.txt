@@ -1,0 +1,280 @@
+// React Router
+
+spa --> in routing you will be using single page application only but you will be having multiple urls
+
+there are two types of routing
+
+server side --> mpa
+
+client side --> spa
+
+react offers a library for routing it does not provide any internal machenism for routing
+
+npm i react-router-dom
+
+createBrowerRouter --> with full url and with data api
+<BrowserRouter> --> this will not have data api 
+
+createHashRouter --> with just path after base url and with data api
+<HashRouter> --> this will not have data api
+
+
+you can create react router in 2 ways 
+
+1 way
+
+const routes = createBrowserRouter([
+  {path: "/", element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items",element: <Items />}
+]);
+
+<RouterProvider router={routes}/>
+
+2 way
+
+const routes = createRoutesFromElements(
+  <>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/items" element={<Items />} />
+  </>
+)
+
+const router = createBrowserRouter(routes);
+
+<RouterProvider router={router}/>
+
+
+Link component from react-router-dom
+
+Link is actaully a tag only but it comes with the wrapper so the page wont refresh if page refresh all the state will go to initial stage 
+
+// Nested Routes 
+
+TypeError: Cannot destructure property 'basename' of 'useContext(...)' as it is null.
+
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,children :[
+    {path: "/", element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items",element: <Items />}
+  ]},
+  
+]);
+
+
+path : ""  this will take parent path for example /
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,children :[
+    {path: "", element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items",element: <Items />}
+  ]},
+  
+]);
+
+
+
+index : true this will work if there is nothing after / 
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,children :[
+    {index: true, element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items",element: <Items />}
+  ]},
+  
+]);
+
+
+2 way
+
+const routes = createRoutesFromElements(
+  <>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/items" element={<Items />} />
+  </>
+)
+
+const routes = createRoutesFromElements(
+  <>
+  <Route path="/" element={<Navbar />} >
+    <Route path="/" or path="" or just give index element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/items" element={<Items />} />
+    </Route>
+  </>
+)
+
+
+NavLink is different from link when you dont have any navbar were you can see links then use link and when you can see the links the use NavLink
+
+<div className="nav">
+          <NavLink style={(navObject)=>{
+            return navObject.isActive ? {color : "blue"} : {color : "orange"}
+          }} to="/"><h4>HOME</h4></NavLink>
+            <NavLink style={(navObject)=>{
+            return navObject.isActive ? {color : "blue"} : {color : "orange"}
+          }} to="/about"><h4>ABOUT</h4></NavLink>
+          <NavLink style={(navObject)=>{
+            return navObject.isActive ? {color : "blue"} : {color : "orange"}
+          }} to="/items"><h4>ITEMS</h4></NavLink>
+          <Outlet />
+</div>
+
+
+// Absolute Vs Relative Path
+
+/ this paths are known as absolute paths
+
+in nested routing we use relative paths 
+
+remove / this is called relative paths 
+
+const routes = createBrowserRouter([
+  {path: "/root", element: <Navbar />,children :[
+    {index: true, element: <Home />},
+  {path: "about", element: <About />},
+  {path: "items",element: <Items />}
+  ]},
+  
+]);
+
+
+// Dynamic Routes
+
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,children :[
+    {index: true, element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items",element: <Items />},
+  {
+    path: "/items/:id",element: <ItemDetails />
+  }
+  ]},
+  
+]);
+
+function Items() {
+  return (
+    <>
+    
+      <main>
+        <h1>Items Page</h1>
+      </main>
+      <ul>
+        <Link to="/items/item-1">
+          <li>Item-1</li>
+        </Link>
+         <Link to="/items/item-2">
+          <li>Item-2</li>
+        </Link>
+         <Link to="/items/item-3">
+          <li>Item-3</li>
+        </Link>
+      </ul>
+    </>
+  );
+}
+
+export function ItemDetails(){
+
+    return(
+        <>
+            <main>
+                <h1>ItemDetails</h1>
+            </main>
+        </>
+    )
+}
+
+
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,children :[
+    {index: true, element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items", children:[
+    { index : true,element: <Items />},
+     {
+    path: ":id",element: <ItemDetails />
+  }
+  ]},
+ 
+  ]},
+  
+]);
+
+
+// Dynamic Pages 
+
+   <main>
+        <h1>Items Page</h1>
+      </main>
+      <ul>
+        {
+          ITEMS.map((ele,index)=>{
+              return (
+                <>
+                    <li key={ele.id}>
+                        <Link to={`/items/${ele.id}`} >
+                          {ele.id}
+                        </Link>
+                      </li>
+                </>
+              )
+          })
+        }
+      </ul>
+     
+const param = useParams();
+    
+    const data = ITEMS.find((ele,index)=>{
+        return ele.id === param.id})
+    return(
+        <>
+            <main>
+                <h1>{data.title}</h1>
+                <h1>{data.detail}</h1>
+            </main>
+        </>
+    )
+
+    export function ItemDetails(){
+
+    const param = useParams();
+    
+    const data = ITEMS.find((ele,index)=>{
+        return ele.id === param.id})
+    return(
+        <>
+            <main>
+                <h1>{data.title}</h1>
+                <h1>{data.detail}</h1>
+               
+            </main>
+        </>
+    )
+}
+
+// unhandled routes
+
+
+const routes = createBrowserRouter([
+  {path: "/", element: <Navbar />,
+    errorElement:<ErrorPage />,
+    children :[
+    {index: true, element: <Home />},
+  {path: "/about", element: <About />},
+  {path: "/items", children:[
+    { index : true,element: <Items />},
+     {
+    path: ":id",element: <ItemDetails />
+  }
+  ]},
+ 
+  ]},
+  
+]);
+
+

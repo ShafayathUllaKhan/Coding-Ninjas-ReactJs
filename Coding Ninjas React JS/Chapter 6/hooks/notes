@@ -1,0 +1,26 @@
+problems with using class based components?
+
+Hard to reuse the stateful logic between components
+complex components become difficult to understand
+classes can be confusing at times 
+
+
+useState
+useEffect = for side effects acts like cdm and cdu
+
+
+Step	What Happens
+Mount	Effect runs, sets up timer
+Update	🔁 Cleanup from previous effect runs → then new setInterval is created
+Unmount	Only the cleanup runs
+
+✅ So yes — on update, the return function runs first, and then the effect body is executed again.
+
+This behavior ensures that:
+
+Old intervals/subscriptions are cleaned up properly before new ones are set up.
+
+You never end up with multiple overlapping timers or subscriptions.
+
+
+

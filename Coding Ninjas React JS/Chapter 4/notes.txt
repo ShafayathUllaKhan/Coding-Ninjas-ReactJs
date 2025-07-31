@@ -1,0 +1,206 @@
+// webpack
+
+module bundler
+
+all the pages will be in bundle js remember the diagram she draw or check on your phone you have a screeshot
+
+bundle.js will be passed to html page
+ will bundle the js files on thier dependencies
+
+webpack.configure.js
+
+create-react-app (inside this you will be having webpack)
+
+//mongo db
+
+db.users.aggregate([
+  { $sort: { age: -1 } },   // Sort by age descending
+  { $skip: 1 },             // Skip the first (highest age) user
+  { $limit: 1 }             // Get the next one (second highest)
+])
+
+
+// install the create-react-app
+
+npm i -g create-react-app
+
+// to create a project
+create-react-app helloworld
+
+// if you dont have create react app globally than you can use this
+npx create-react-app helloworld
+
+// to run the project
+npm start
+
+// import and export 
+
+named export  // import {} from filename
+export below export {all the modules};
+
+default export
+import anyname from filename
+
+use as in export or import 
+
+// React components 
+
+1. functional components
+2. class based
+
+// state in react
+
+state is an built in object
+
+state is single source of truth
+
+create a constructor and add state in that and after that destructure
+
+// Binding this
+
+first option
+
+ <img className="str-btn" alt="increase" src="https://cdn-icons-png.flaticon.com/128/2997/2997933.png" 
+ onClick={this.addStars.bind(this)} />
+
+second option
+
+    constructor(){
+        super();
+         this.state = {
+            title :"The Avengers",
+            plot:"Supernatural powers shown in the movie.",
+            price:199,
+            rating:8.9
+        }
+        this.addStars = this.addStars.bind(this);
+    }
+
+third option
+
+is to use arrow function
+
+
+// Increasing Stars using setSate()
+
+setSate update the state and rerender the component
+
+  // form 1 // use when you dont care about previous state
+        this.setState({
+            stars: this.state.stars + 0.5
+        })
+
+        // form 2 // use when you care about previous state
+        this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        })
+
+
+// more on setState
+
+it is async
+batching
+
+there was one flow in ract 16 now it is fixed the flow was when using promise or ajax the setState use to become syncrenous
+
+if you want se the state which is updated then just add a callback after first argument of setState function
+
+
+ this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        },()=>{
+          console.log(this.state.stars);
+        });
+
+
+you can do this in both the forms
+
+// batching
+
+this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        })
+
+this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        })
+
+this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        })
+
+this.setState((prevState)=>{
+            return {stars : prevState.stars + 0.5};
+
+        })
+
+
+only the last call will be executed all the calls will be bached to 1 is process is called batching
+
+
+and one more thing when you render the component you will get two consoles so one is the normal console and other one is the virtual machine because you are using strict mode in index.js
+
+in callback setstate the previous state will update and rendering will be only once because it will be in queue
+
+// toggling the favourite button
+
+// Props
+
+are like arguments in functions
+
+practice props in function and class and in defualtProps
+
+
+// styling in react
+
+1. css stylessheet
+2. Inline styling
+
+<div style={{width:"100%" , height: 70,backgroundColor:"red",display:"flex",justifyContent:"space-between"}}>
+                <div>Title</div>
+                <div>
+                    <img alt="cart icon" />
+                    <span>0</span>
+                </div>
+            </div>
+
+
+// css scope in react
+const styles = {
+    nav:{
+        width:"100%" , height: 70,backgroundColor:"red",display:"flex",justifyContent:"space-between"
+    }
+}
+
+<div style={styles.nav}>
+
+3. styled component
+
+css in js styling means no camel case you will be using css pure css
+
+and it is a library
+
+and has local scope and css is global scope
+
+deletion of styles is easy 
+
+ npm i styled-components
+
+ // Dynamic styles in styled components
+use props and hover
+
+4. css modules
+
+1. MyComponent.module.css
+2. import styles from './MyComponent.module.css';// this implicitly defualt export a object
+3. function MyComponent() {
+  return <div className={styles.box}>Hello from CSS Modules</div>;
+}
+
+
+

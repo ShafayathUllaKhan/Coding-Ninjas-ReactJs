@@ -1,0 +1,63 @@
+
+// Component Lifecycle Methods
+
+1. mounting :- When an instance of a component is being created and inserted into the DOM
+
+2. Updating :- When a component is being re-rendered as a result of changes done to its props or state
+
+3. un-mounting :- When a Component is being removed from the DOM.
+
+4. Error Handling :- when there is an Error during rendering
+
+
+Side effects - are actions which are not predictable because they are actions which are performed with the "outside world"
+
+like
+1. Interacting with the browser apis like local storage.
+2. Native DOM methods instead of React DOM
+3. Fetching the Data using API 
+4. operation with db 
+
+// Mounting Phase
+constructor() --> avoid side effects and setState and in constructor you can directly update the state
+Static getDerivedStateFromProps() --> avoid side effects
+render() --> avoid side effects and render is pure function
+componentDidMount() --> when component and all its children mounted on the dom this method gets invoked and in this method you can perform side effects and setStatus also
+
+
+// Updating Phase 
+
+static getDerivedStateFromProps()--> no side effects
+render()
+getSnapShotBeforeUpdate() --> this returns a value which is called snapshot and this gets invoked when virtual dom changes are reflecting in dom we can pass the snapshot to componentDidUpdate
+componentDidUpdate() --> this will invoke when the component is re-rendered and will run multiple times but componentDidMount will run only once when it is rendered for the first time
+shouldComponentUpdate() --> by this we can control render function this function returns a boolean value true so you can change this to false by using condition and no side effects and no setState
+
+
+
+// Un-Mounting
+
+componentWillUnmount() --> no side effects and setState you can use this method for clearing timer and database connection or clearing memory
+
+
+// Error Handling Phase
+
+static getDerivedStateFromError() --> this will invoke when there is any error which occurs
+
+componentDidCatch() --> this will catch the error and log it and give us the callback ui
+
+errorBoundary is a react component which has either of this lifecycle methods or both of this lifecycle methods that react component is known as error boundary
+
+
+Lifecycle Method	Called Twice in StrictMode?	Why / When
+constructor()	✅ Yes	To detect unsafe setup or side effects
+render()	✅ Yes	To catch rendering side effects
+componentDidMount()	✅ Yes	Simulates mount/unmount/remount
+componentWillUnmount()	✅ Yes	Fake unmount to test cleanup
+shouldComponentUpdate()	✅ Yes	If a render happens again
+getSnapshotBeforeUpdate()	✅ Yes (if componentDidUpdate runs)	For completeness in the update cycle
+componentDidUpdate()	✅ Yes (if re-rendered)	Completes update lifecycle after mount
+getDerivedStateFromProps()	❌ No	Pure function, runs once per actual render
+componentWillMount / willReceiveProps / willUpdate	❌ Not called	These are deprecated, not used in StrictMode
+
+
